@@ -4,12 +4,14 @@ WORKDIR /app
 
 RUN pip install poetry
 
-COPY . .
+COPY frontend/poetry.lock ./
+
+COPY frontend/pyproject.toml ./
 
 RUN poetry install
 
-EXPOSE 8080
+COPY frontend/frontend frontend/
 
-CMD poetry run streamlit run --server.port 8080 Streamlit_GUI.py --server.address 0.0.0.0
+COPY frontend/frontend/Streamlit_data Streamlit_data
 
-
+CMD poetry run streamlit run --server.port 8080 frontend/Streamlit_GUI.py --server.address 0.0.0.0

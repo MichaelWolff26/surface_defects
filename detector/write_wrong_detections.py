@@ -5,9 +5,9 @@ from torchvision.utils import save_image
 
 
 def write_wrong_detections(data_path, x_test, y_test, is_correct):
-    if data_path + "wrong_defect":
+    if os.path.exists(data_path + "wrong_defect"):
         shutil.rmtree(data_path + "wrong_defect\\")
-    if data_path + "wrong_io":
+    if os.path.exists(data_path + "wrong_io"):
         shutil.rmtree(data_path + "wrong_io\\")
     os.mkdir(path=data_path + "wrong_defect\\")
     os.mkdir(path=data_path + "wrong_io\\")

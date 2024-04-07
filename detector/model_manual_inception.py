@@ -70,9 +70,9 @@ class inception_block(nn.Module):
         return X
 
 
-class inception_Network(nn.Module):
+class inception_Network_based(nn.Module):
     def __init__(self, inception_block):
-        super(inception_Network, self).__init__()
+        super(inception_Network_based, self).__init__()
         self.input_conv = nn.Conv2d(
             in_channels=3, out_channels=32, kernel_size=11, stride=4, padding=0
         )
@@ -83,7 +83,7 @@ class inception_Network(nn.Module):
         self.dense2 = nn.Linear(in_features=1000, out_features=2)
         self.relu2 = nn.ReLU()
         self.flatten = nn.Flatten()
-        self.relu3 = nn.ReLU()
+        self.sigmoid = nn.Sigmoid()
 
     def forward(self, X):
         X = self.input_conv(X)
@@ -95,10 +95,5 @@ class inception_Network(nn.Module):
         X = self.dense1(X)
         X = self.relu2(X)
         X = self.dense2(X)
-        X = self.relu3(X)
+        X = self.sigmoid(X)
         return X
-
-
-def inception():
-    model = inception_Network(inception_block=inception_block)
-    return model

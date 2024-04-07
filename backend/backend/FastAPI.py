@@ -5,6 +5,12 @@ import torch
 
 app = FastAPI()
 
+model = torchvision.models.resnet.ResNet(
+    torchvision.models.resnet.BasicBlock, [2, 2, 2, 2], num_classes=2
+)
+path_mp = os.getcwd() + "/model_parameters/model.md"
+model = torch.load(path_mp)
+
 
 @app.get("/")
 def hello():
@@ -14,10 +20,9 @@ def hello():
 @app.post("/upload_image")
 async def upload_image(filename: str, img_file: UploadFile = File(...)):
     class_var = 0
-    class_str = "unsucessful"
-    class_str = filename
+    class_str = filename or "unsuccessful"
 
-    if ".jpg" in filename or ".jpeg" in filename or ".png" in filename:
+    if any(suffix in filename for suffix in [".jpg", ".jpeg", ".png"]):
         class_str = "passed0"
         file_save_path = "./images_fastapi/" + img_file.filename
         if not os.path.exists("./images_fastapi"):
