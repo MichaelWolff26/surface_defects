@@ -14,3 +14,5 @@
 /.ruff_cache
 *.tar
 /model_parameters
+.vscode/
+.python-version
