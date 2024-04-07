@@ -7,7 +7,6 @@
 /backend/.venv
 /backend/backend/model_parameters
 /backend/tests
-/backend/backend/images_fastapi
 /notebooks/.ruff_cache
 /Dataset-trafo
 /.venv
