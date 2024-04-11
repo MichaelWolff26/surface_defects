@@ -4,9 +4,7 @@ WORKDIR /app
 
 RUN pip install poetry
 
-COPY backend/poetry.lock ./
-
-COPY backend/pyproject.toml ./
+COPY backend/poetry.lock backend/pyproject.toml ./
 
 RUN poetry install
 
