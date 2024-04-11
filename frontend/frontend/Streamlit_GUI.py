@@ -5,13 +5,19 @@ import requests
 
 
 streamlit.header("Steel surface defect analyser")
-streamlit.write(
-    "The Data is based on the Kolektor Surface-Defect Dataset 2 and is modified"
-)
-streamlit.write("License: https://creativecommons.org/licenses/by-nc-sa/4.0/")
-streamlit.write("This is a non commercial website")
 
-number = streamlit.slider("Pick one of the 100 sample images")
+streamlit.write(
+    "This tool analyzes wether a steel surface has defects or not and uses Artificial Intelligence.  \nThe projectfiles can be viewed here:https://github.com/MichaelWolff26/surface_defects.git."
+)
+
+streamlit.write(
+    "The Data is based on the Kolektor Surface-Defect Dataset 2 and is modified.  \nLicense: https://creativecommons.org/licenses/by-nc-sa/4.0/  \nThis is a non commercial website."
+)
+
+
+streamlit.header("1: Pick a sample image for analysis")
+
+number = streamlit.slider("Move the slider to select a a sample image, the image is shown below")
 
 
 data_path = f"{os.getcwd()}/Dataset-trafo"
@@ -31,7 +37,7 @@ with Image.open(data_path + list_samples[number]) as img:
     img.load()
     data2=img
 
-data = streamlit.file_uploader("Or upload own surface image", type="png")
+data = streamlit.file_uploader("Or upload own surface image here and activate the toogle switch below, Size min. 633x228 pixel", type="png")
 
 own_data = streamlit.toggle("Use own surface image")
 
@@ -50,7 +56,7 @@ if (data or data2) is not None:
 
     if not (own_data and not data):
         streamlit.image(test)
-
+    streamlit.header("2: Click the Analyze button")
     if streamlit.button("Analyze"):
         
         url = "http://backend:8000/upload_image"
