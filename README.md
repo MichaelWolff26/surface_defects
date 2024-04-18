@@ -4,7 +4,7 @@ This tool analyzes wether a steel surface has defects or not and uses Artificial
 
 # program elements:
 
-- "trainingipynb" in the notebooks folder: The AI is trained in this jupyter notebook. Here it is possible to choose different models (Code for the models is in the detector folder), analyze the results with a confusion matrix and save the model parameters to a file. An own .venv is created with poetry for the notebook.
+- "training.ipynb" in the notebooks folder: The AI is trained in this jupyter notebook. Here it is possible to choose different models (Code for the models is in the detector folder), analyze the results with a confusion matrix and save the model parameters to a file. An own .venv is created with poetry for the notebook.
 
 - "FastAPI.py" in the backend/backend folder: This file provides the backend of the webpage. It features FastAPI and is a post request based backend, that analyzes image data with the saved model parameters and sends the result back to the frontend. An own .venv is created with poetry for FastAPI.py.
 
