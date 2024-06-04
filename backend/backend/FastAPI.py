@@ -37,12 +37,6 @@ async def upload_image(filename: str, img_file: UploadFile = File(...)):
         )
         norm_img = img_cropped / 255
         norm_img_2 = norm_img[None, :, :, :]
-
-        model = torchvision.models.resnet.ResNet(
-            torchvision.models.resnet.BasicBlock, [2, 2, 2, 2], num_classes=2
-        )
-        path_mp = os.getcwd() + "/model_parameters/model.md"
-        model = torch.load(path_mp)
         pred = model(norm_img_2)
         class_var = torch.argmax(pred, dim=1)
         class_str = int(class_var)
